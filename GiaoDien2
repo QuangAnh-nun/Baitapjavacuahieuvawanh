@@ -1,4 +1,4 @@
-
+package giaodien;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -12,23 +12,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-/**
- * GiaoDien.java
- * Demo offline (không dùng SQL) cho "Ứng dụng Quản lý Sự kiện & Vé"
- *
- * - File: Source Packages/giaodien/GiaoDien.java
- * - Chạy trực tiếp trong NetBeans / IntelliJ / Eclipse
- *
- * Thay đổi chính:
- *  - Mỗi Event giờ có vé theo hạng: Thường, Vip, Vvip (tổng + còn lại từng hạng)
- *  - Giá vé mặc định: Thường=100000, Vip=200000, Vvip=500000
- *  - Doanh thu tính theo từng hạng (sold * price)
- *  - Đặt / hủy vé xử lý theo hạng tương ứng
- *  - Thống kê nhanh (bên phải) hiển thị Tổng vé đã bán và Tổng doanh thu
- *
- * Lưu ý: Tôi giữ lại cũng như mở rộng code gốc của bạn, sửa và thêm chứ không thay đổi triệt để.
- */
 public class GiaoDien extends JFrame {
 
     // --- Data models (in-memory) ---
@@ -50,12 +33,12 @@ public class GiaoDien extends JFrame {
     private JLabel lblRevenue;
 
     // Fonts
-    private final Font FONT_TITLE = new Font("Cascadia Mono", Font.BOLD, 22);
+    private final Font FONT_TITLE = new Font("Cascadia Mono", Font.BOLD, 32);
     private final Font FONT_NORMAL = new Font("Cascadia Mono", Font.PLAIN, 13);
 
     public GiaoDien() {
-        setTitle("Ứng dụng Quản lý Sự kiện & Vé (Demo offline)");
-        setSize(1100, 780);
+        setTitle("Ứng dụng Quản lý Sự kiện & Vé (Offline)");
+        setSize(1100, 800);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initSampleData();
@@ -121,6 +104,8 @@ public class GiaoDien extends JFrame {
         JScrollPane spEvents = new JScrollPane(tableEvents);
         spEvents.setBorder(BorderFactory.createTitledBorder("Danh sách Sự kiện"));
         spEvents.setPreferredSize(new Dimension(700, 220));
+        tableEvents.setSelectionBackground(new Color(204, 229, 255)); // nền xanh nhạt khi chọn
+        tableEvents.setSelectionForeground(Color.BLACK);
 
         // popup menu for events
         JPopupMenu popupEvent = new JPopupMenu();
@@ -207,6 +192,7 @@ public class GiaoDien extends JFrame {
         styleTable(tableTickets);
         JScrollPane spTickets = new JScrollPane(tableTickets);
         spTickets.setBorder(BorderFactory.createTitledBorder("Danh sách Vé"));
+        tableTickets.setSelectionBackground(new Color(204, 229, 255)); // nền xanh nhạt khi chọn
         spTickets.setPreferredSize(new Dimension(700, 280));
 
         // popup for tickets
